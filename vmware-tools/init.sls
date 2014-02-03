@@ -11,6 +11,7 @@ tar-vmware:
     module.run:
         - name: archive.tar
         - options: xf
+        # FIXME: take out tar file name
         - tarfile: {{ pillar.get('path', '/tmp/') }}VMwareTools-8.3.12-493255.tar
         - cwd: /tmp/
 
