@@ -1,2 +1,3 @@
-template:
-  master: template-master
+path: '/tmp/'
+file: 'VMwareTools-8.3.12-493255.tar.gz'
+source_hash: 'a3daed3dafa9ffe1fd517680708c0d30fbb9e11f'
