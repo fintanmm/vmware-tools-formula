@@ -5,22 +5,21 @@ include:
 gunzip-vmware:
     module.run:
         - name: archive.gunzip
-        - gzipfile: {{ pillar.get('vmware.path', '/tmp/') }}VMwareTools-{{ pillar.get('vmware.version', '8.3.12-493255') }}.tar.gz
+        - gzipfile: {{ salt['pillar.get']('vmware:path') }}VMwareTools-{{ salt['pillar.get']('vmware:version') }}.tar.gz
 
 tar-vmware:
     module.run:
         - name: archive.tar
         - options: xf
-        # FIXME: take out tar file name
-        - tarfile: {{ pillar.get('vmware.path', '/tmp/') }}VMwareTools-{{ pillar.get('vmware.version', '8.3.12-493255') }}.tar.gz
+        - tarfile: {{ salt['pillar.get']('vmware:path') }}VMwareTools-{{ salt['pillar.get']('vmware:version') }}.tar.gz
         - cwd: /tmp/
 
 # extract-vmware:
 #   archive:
 #     - extracted
 #     - name: /tmp/
-#     - source: {{ pillar.get('vmware.path', '/tmp/') }}VMwareTools-{{ pillar.get('vmware.version', '8.3.12-493255') }}.tar.gz
-#     - source_hash: {{ pillar.get('vmware.path', '/tmp/') }}
+#     - source: {{ salt['pillar.get']('vmware:path') }}VMwareTools-{{ salt['pillar.get']('vmware:version') }}.tar.gz
+#     - source_hash: {{ salt['pillar.get']('vmware:source_hash') }}
 #     - tar_options: J
 #     - archive_format: tar
 #     - if_missing: /tmp/vmware-tools-distrib/
