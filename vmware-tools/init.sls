@@ -2,13 +2,6 @@
 include:
   - build-essential
 
-vmware:
-    file.managed:
-        # - unless: vmware-tools
-        - name: /tmp/VMwareTools-{{ salt['pillar.get']('vmware:version') }}.tar.gz
-        - source: {{ salt['pillar.get']('vmware:path') }}VMwareTools-{{ salt['pillar.get']('vmware:version') }}.tar.gz
-        - source_hash: {{ salt['pillar.get']('vmware:source_hash') }}
-
 extract-vmware:
     module.run:
         - name: archive.tar
