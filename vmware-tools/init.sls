@@ -2,27 +2,19 @@
 include:
   - build-essential
 
-gunzip-vmware:
-    module.run:
-        - name: archive.gunzip
-        - gzipfile: {{ salt['pillar.get']('vmware:path') }}VMwareTools-{{ salt['pillar.get']('vmware:version') }}.tar.gz
+vmware:
+    file.managed:
+        # - unless: vmware-tools
+        - name: /tmp/VMwareTools-{{ salt['pillar.get']('vmware:version') }}.tar.gz
+        - source: {{ salt['pillar.get']('vmware:path') }}VMwareTools-{{ salt['pillar.get']('vmware:version') }}.tar.gz
+        - source_hash: {{ salt['pillar.get']('vmware:source_hash') }}
 
-tar-vmware:
+extract-vmware:
     module.run:
         - name: archive.tar
-        - options: xf
+        - options: zxf
         - tarfile: {{ salt['pillar.get']('vmware:path') }}VMwareTools-{{ salt['pillar.get']('vmware:version') }}.tar.gz
-        - cwd: /tmp/
-
-# extract-vmware:
-#   archive:
-#     - extracted
-#     - name: /tmp/
-#     - source: {{ salt['pillar.get']('vmware:path') }}VMwareTools-{{ salt['pillar.get']('vmware:version') }}.tar.gz
-#     - source_hash: {{ salt['pillar.get']('vmware:source_hash') }}
-#     - tar_options: J
-#     - archive_format: tar
-#     - if_missing: /tmp/vmware-tools-distrib/
+        - dest: /tmp/
 
 install-vmware-tools:
     cmd.run:
