@@ -3,11 +3,12 @@ include:
   - build-essential
 
 vmware:
-    file.managed:
+    file.copy:
         # - unless: vmware-tools
         - name: /tmp/VMwareTools-{{ salt['pillar.get']('vmware:version') }}.tar.gz
         - source: file:///{{ salt['pillar.get']('vmware:path') }}VMwareTools-{{ salt['pillar.get']('vmware:version') }}.tar.gz
         - source_hash: {{ salt['pillar.get']('vmware:source_hash') }}
+        - makedirs: true
 
 extract-vmware:
     module.run:
